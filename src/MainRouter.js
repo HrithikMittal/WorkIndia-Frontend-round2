@@ -6,6 +6,7 @@ import Signup from "./user/Signup";
 import Signin from "./user/Signin";
 import Menu from "./core/Menu";
 import AddItem from "./user/AddItem";
+import EditItem from "./user/EditItem";
 
 const MainRouter = () => {
   return (
@@ -16,6 +17,7 @@ const MainRouter = () => {
         <Route exact path="/signup" component={Signup}></Route>
         <Route exact path="/signin" component={Signin}></Route>
         <Route exact path="/addItem" component={AddItem}></Route>
+        <Route exact path="/editItem" component={EditItem}></Route>
       </Switch>
     </div>
   );

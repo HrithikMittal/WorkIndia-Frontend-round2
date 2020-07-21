@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { isAuthenticated, addItem } from "../auth";
+import { isAuthenticated, updateItem } from "../auth";
 
-class AddItem extends Component {
+class EditItem extends Component {
   state = {
     website: "",
     username: "",
@@ -27,9 +27,11 @@ class AddItem extends Component {
     const userId = isAuthenticated().userRes.id;
     const token = isAuthenticated().token;
 
-    addItem(userId, token, dataToSave).then((data) => {
-      if (data.statusCode === 302) {
-        this.setState({ error: data.message });
+    updateItem(userId, token, dataToSave).then((data) => {
+      if (data.statusCode === 404) {
+        this.setState({
+          error: data.message + " Please go to Add Password route",
+        });
       } else if (data.error) {
         this.setState({ error: data.error });
       } else
@@ -46,7 +48,7 @@ class AddItem extends Component {
   render() {
     return (
       <div className="container">
-        <h2 className="mt-5 mb-5"> Add Password</h2>
+        <h2 className="mt-5 mb-5"> Update Password</h2>
 
         <div
           className="alert alert-danger"
@@ -59,7 +61,7 @@ class AddItem extends Component {
           className="alert alert-info"
           style={{ display: this.state.open ? "" : "none" }}
         >
-          Password is added successfully
+          Password is updated successfully
         </div>
 
         <form>
@@ -103,4 +105,4 @@ class AddItem extends Component {
   }
 }
 
-export default AddItem;
+export default EditItem;

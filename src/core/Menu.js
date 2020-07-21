@@ -63,6 +63,15 @@ const Menu = (props) => {
             <li className="nav-item">
               <Link
                 className="nav-link"
+                to="/editItem"
+                style={isActive(props.history, "/editItem")}
+              >
+                Edit Password
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                className="nav-link"
                 style={isActive(props.history, "/signup")}
                 to=""
                 onClick={() =>

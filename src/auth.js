@@ -35,7 +35,6 @@ export const signin = (user) => {
 export const signout = (next) => {
   if (typeof window !== undefined) {
     var valId = JSON.parse(localStorage.getItem("jwt"));
-    console.log(valId);
     localStorage.removeItem("jwt");
   }
   next();
@@ -51,7 +50,6 @@ export const signout = (next) => {
     }
   )
     .then((response) => {
-      console.log(response);
       return response.json();
     })
     .catch((err) => {
@@ -69,7 +67,6 @@ export const getAllItems = (userId, token) => {
     },
   })
     .then((response) => {
-      console.log(response);
       return response.json();
     })
     .catch((err) => {
@@ -95,7 +92,27 @@ export const addItem = (userId, token, data) => {
     body: JSON.stringify(data),
   })
     .then((response) => {
-      console.log(response);
+      return response.json();
+    })
+    .catch((err) => {
+      console.log("Error", err);
+    });
+};
+
+export const updateItem = (userId, token, data) => {
+  return fetch(
+    process.env.REACT_APP_API_URL + `/sites/update?userId=${userId}`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(data),
+    }
+  )
+    .then((response) => {
       return response.json();
     })
     .catch((err) => {

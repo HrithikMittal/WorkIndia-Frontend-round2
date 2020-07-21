@@ -5,7 +5,7 @@ class Item extends Component {
     items: [],
   };
 
-  onClickHandler = () => {
+  componentWillMount() {
     var data = isAuthenticated();
     getAllItems(data.userRes.id, data.token)
       .then((dataApi) => {
@@ -14,45 +14,39 @@ class Item extends Component {
       .catch((err) => {
         console.log("Error is", err);
       });
-  };
-
-  componentWillMount() {
-    //   .then((data) => {
-    //     var userId, token;
-    //     userId = data.userRes.id;
-    //     token = data.token;
-    //     getAllItems(userId, token)
-    //       .then((items) => {
-    //         console.log(items);
-    //       })
-    //       .catch((err) => {
-    //         console.log("Error is", err);
-    //       });
-    //   })
-    //   .catch((err) => {
-    //     console.log("Error is", err);
-    //   });
   }
   render() {
     return (
       <>
-        <div onClick={this.onClickHandler}>All the card</div>
-        {this.state.items &&
-          this.state.items.map((item, index) => {
-            return (
-              <div
-                key={index}
-                className="card"
-                style={{ width: `20rem`, marginBottom: "10", padding: "10" }}
-              >
-                <div className="card-header">{item.website}</div>
-                <div className="card-body">
-                  <h5 className="card-title">username:{item.username}</h5>
-                  <h5 className="card-title">password:{item.password}</h5>
+        <div
+          className="card-columns"
+          style={{ marginLeft: "20px", marginRight: "20px" }}
+        >
+          {this.state.items &&
+            this.state.items.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  className="card"
+                  style={{ borderRadius: "10px" }}
+                >
+                  <div className="card-header">
+                    <b style={{ fontSize: "20px" }}>{item.website}</b>
+                  </div>
+                  <div className="card-body">
+                    <h5 className="card-title">
+                      <b>Username:</b>
+                      {item.username}
+                    </h5>
+                    <h5 className="card-title">
+                      <b>Password:</b>
+                      {item.password}
+                    </h5>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+        </div>
         <div></div>
       </>
     );

@@ -54,7 +54,17 @@ const Menu = (props) => {
             <li className="nav-item">
               <Link
                 className="nav-link"
+                to="/addItem"
+                style={isActive(props.history, "/addItem")}
+              >
+                Add Password
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                className="nav-link"
                 style={isActive(props.history, "/signup")}
+                to=""
                 onClick={() =>
                   signout(() => {
                     props.history.push("/");

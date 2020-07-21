@@ -83,3 +83,22 @@ export const isAuthenticated = () => {
     return JSON.parse(localStorage.getItem("jwt"));
   } else return false;
 };
+
+export const addItem = (userId, token, data) => {
+  return fetch(process.env.REACT_APP_API_URL + `/sites?userId=${userId}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => {
+      console.log(response);
+      return response.json();
+    })
+    .catch((err) => {
+      console.log("Error", err);
+    });
+};
